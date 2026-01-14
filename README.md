@@ -93,13 +93,13 @@ Repository này được sử dụng nhằm trình bày ý tưởng nghiên cứ
 
   - Cross-Attention ổn định hơn Concatenation, đặc biệt ở H = 1–7
   - **Ảnh kết quả**:
-    - <img width="814" height="513" alt="image" src="https://github.com/user-attachments/assets/b31bebfd-5378-42f6-8052-2b1298dec184" />
-    - <img width="833" height="468" alt="image" src="https://github.com/user-attachments/assets/e5fcd6b3-8e32-41d8-aa9a-1bcbeb5d4a4e" />
-    - <img width="833" height="425" alt="image" src="https://github.com/user-attachments/assets/d5552e00-00ad-4916-ae8e-ff6291f80e3c" />
-    - <img width="734" height="533" alt="image" src="https://github.com/user-attachments/assets/f801d270-df24-42e6-8c5f-bbb06e6eeaa5" />
-    - <img width="813" height="562" alt="image" src="https://github.com/user-attachments/assets/707e0936-c851-43e5-aa1d-bd14f995116b" />
-    - <img width="770" height="431" alt="image" src="https://github.com/user-attachments/assets/b7890c88-537c-417a-a54c-2e797749b679" />
-    -  <img width="851" height="363" alt="image" src="https://github.com/user-attachments/assets/a6b80f54-f126-4f43-8970-d7b6831793b0" />
+     <img width="814" height="513" alt="image" src="https://github.com/user-attachments/assets/b31bebfd-5378-42f6-8052-2b1298dec184" />
+     <img width="833" height="468" alt="image" src="https://github.com/user-attachments/assets/e5fcd6b3-8e32-41d8-aa9a-1bcbeb5d4a4e" />
+     <img width="833" height="425" alt="image" src="https://github.com/user-attachments/assets/d5552e00-00ad-4916-ae8e-ff6291f80e3c" />
+     <img width="734" height="533" alt="image" src="https://github.com/user-attachments/assets/f801d270-df24-42e6-8c5f-bbb06e6eeaa5" />
+     <img width="813" height="562" alt="image" src="https://github.com/user-attachments/assets/707e0936-c851-43e5-aa1d-bd14f995116b" />
+     <img width="770" height="431" alt="image" src="https://github.com/user-attachments/assets/b7890c88-537c-417a-a54c-2e797749b679" />
+     <img width="851" height="363" alt="image" src="https://github.com/user-attachments/assets/a6b80f54-f126-4f43-8970-d7b6831793b0" />
 
 **📌 Kết luận**
 
