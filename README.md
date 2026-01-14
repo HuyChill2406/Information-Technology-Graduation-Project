@@ -8,6 +8,7 @@ Dự án này là đồ án tốt nghiệp ngành Công nghệ Thông tin, tập
 Khác với các phương pháp chỉ sử dụng dữ liệu giá hoặc kết hợp tin tức một cách hời hợt, dự án đề xuất các chiến lược fusion có định hướng, đặc biệt là cross-attention, nhằm giúp mô hình tự động chọn lọc các tin tức thực sự liên quan đến biến động giá.
 
 **Lưu ý (Note)**
+
 Dự án hiện đang trong giai đoạn hoàn thiện và đánh giá (grading phase) của đồ án tốt nghiệp. Do đó, toàn bộ mã nguồn chưa được công khai đầy đủ tại thời điểm hiện tại.
 
 Repository này được sử dụng nhằm trình bày ý tưởng nghiên cứu, thiết kế mô hình, quy trình thực nghiệm và kết quả chính của dự án. Mã nguồn hoàn chỉnh sẽ được cập nhật sau khi quá trình chấm điểm chính thức kết thúc.
