@@ -107,57 +107,58 @@ Repository này được sử dụng nhằm trình bày ý tưởng nghiên cứ
 Dự án chứng minh rằng tích hợp tin tức tài chính một cách có chọn lọc thông qua cross-attention giúp cải thiện đáng kể độ chính xác dự báo giá cổ phiếu, đặc biệt trong ngắn hạn. Đây là một hướng tiếp cận khả thi cho các hệ thống hỗ trợ quyết định giao dịch và đầu tư.
 
 # 🇬🇧 README (English) Developing Multimodal Models for Stock Price Forecasting
-📖 Overview
+## 📖 Overview
 
 This undergraduate IT graduation project proposes a multimodal stock price forecasting framework that integrates historical market time-series data with Vietnamese financial news.
 
 Unlike conventional approaches that either rely solely on numerical data or naïvely combine text and prices, this project introduces relevance-aware multimodal fusion, particularly via cross-attention, to dynamically identify news that truly influences price movements.
 
-🎯 Objectives
+## Note
 
-Develop multimodal forecasting models using:
+This project is currently in the final development and grading phase of an undergraduate graduation project. Therefore, the complete source code is not publicly available at this stage.
 
-Cross-Attention
+This repository is intended to present the research motivation, model design, experimental pipeline, and key findings of the project. The full implementation will be released after the official evaluation process is completed.
 
-Feature Concatenation
+## 🎯 Objectives
 
-Compare time-series-only and multimodal approaches
+  - Develop multimodal forecasting models using: Cross-Attention, Feature Concatenation
 
-Evaluate performance across multiple horizons:
-H ∈ {1, 4, 7, 10, 14, 21}
+  - Compare time-series-only and multimodal approaches
 
-Analyze horizon-dependent contributions of financial news.
+  - Evaluate performance across multiple horizons: H ∈ {1, 4, 7, 10, 14, 21}
 
-🗂️ Datasets
+  - Analyze horizon-dependent contributions of financial news.
 
-Stock data: ACB (VN30), 2020–2025, OHLCV + technical + macro indicators
+## 🗂️ Datasets
 
-News data: 13,739 Vietnamese financial articles (Kaggle + VnEconomy)
+  - Stock data: ACB (VN30), 2020–2025, OHLCV + technical + macro indicators
 
-Leakage prevention via lagged macroeconomic variables
+  - News data: 13,739 Vietnamese financial articles (Kaggle + VnEconomy)
 
-🧠 Models & Methods
+  - Leakage prevention via lagged macroeconomic variables
 
-Time-series encoders: LSTM, PatchTST, iTransformer
+## 🧠 Models & Methods
 
-Text embeddings: Vietnamese Embedding, Vietnamese Document Embedding
+  - Time-series encoders: LSTM, PatchTST, iTransformer
 
-Fusion strategies: Cross-Attention, Concatenation
+  - Text embeddings: Vietnamese Embedding, Vietnamese Document Embedding
 
-Optimization: AdamW, Optuna, Early Stopping
+  - Fusion strategies: Cross-Attention, Concatenation
 
-Evaluation: MAE, RMSE, MAPE across multiple horizons
+  - Optimization: AdamW, Optuna, Early Stopping
 
-📊 Key Findings
+  - Evaluation: MAE, RMSE, MAPE across multiple horizons
 
-Filtered features perform better for short horizons
+## 📊 Key Findings
 
-Full features dominate medium-to-long horizons
+  - Filtered features perform better for short horizons
 
-Multimodal models improve MAE by up to ~9% in short-term forecasts
+  - Full features dominate medium-to-long horizons
 
-Cross-attention provides more robust and selective fusion than concatenation
+  - Multimodal models improve MAE by up to ~9% in short-term forecasts
 
-📌 Conclusion
+  - Cross-attention provides more robust and selective fusion than concatenation
 
-The results confirm that relevance-aware news integration via cross-attention significantly enhances stock price forecasting, particularly for short- and medium-term horizons, offering practical insights for real-world financial decision-support systems.
+## 📌 Conclusion
+
+  - The results confirm that relevance-aware news integration via cross-attention significantly enhances stock price forecasting, particularly for short- and medium-term horizons, offering practical insights for real-world financial decision-support systems.
