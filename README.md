@@ -1,19 +1,19 @@
 # Information-Technology-Graduation-Project
 
 # 🇻🇳 README (Vietnamese) Developing Multimodal Models for Stock Price Forecasting
-**📖 Giới thiệu**
+## **📖 Giới thiệu**
 
 Dự án này là đồ án tốt nghiệp ngành Công nghệ Thông tin, tập trung xây dựng mô hình dự báo giá cổ phiếu đa phương thức bằng cách tích hợp dữ liệu chuỗi thời gian thị trường và tin tức tài chính tiếng Việt.
 
 Khác với các phương pháp chỉ sử dụng dữ liệu giá hoặc kết hợp tin tức một cách hời hợt, dự án đề xuất các chiến lược fusion có định hướng, đặc biệt là cross-attention, nhằm giúp mô hình tự động chọn lọc các tin tức thực sự liên quan đến biến động giá.
 
-**Lưu ý (Note)**
+## **Lưu ý (Note)**
 
 Dự án hiện đang trong giai đoạn hoàn thiện và đánh giá (grading phase) của đồ án tốt nghiệp. Do đó, toàn bộ mã nguồn chưa được công khai đầy đủ tại thời điểm hiện tại.
 
 Repository này được sử dụng nhằm trình bày ý tưởng nghiên cứu, thiết kế mô hình, quy trình thực nghiệm và kết quả chính của dự án. Mã nguồn hoàn chỉnh sẽ được cập nhật sau khi quá trình chấm điểm chính thức kết thúc.
 
-**🎯 Mục tiêu**
+## **🎯 Mục tiêu**
 
 - **Phát triển các mô hình dự báo** giá cổ phiếu **đa phương thức** dựa trên: **Cross-Attention, Feature Concatenation**
 
@@ -23,7 +23,7 @@ Repository này được sử dụng nhằm trình bày ý tưởng nghiên cứ
 
 - **Phân tích vai trò của tin tức tài chính** trong ngắn hạn và trung hạn.
 
-**🗂️ Dữ liệu**
+## **🗂️ Dữ liệu**
 - **📈 Dữ liệu chuỗi thời gian (ACB – VN30)**
 
   - **Thời gian**: 01/2020 – 10/2025
@@ -35,7 +35,7 @@ Repository này được sử dụng nhằm trình bày ý tưởng nghiên cứ
     - **Technical indicators** (RSI, MA, MACD, ADX, STOCH, STOCHRSI)
     - **Macroeconomic indicators** (GDP, CPI, USD/VND)
 
-**🔒 Chống data leakage:**
+## **🔒 Chống data leakage:**
 
   - GDP trễ 1 năm
 
@@ -43,7 +43,7 @@ Repository này được sử dụng nhằm trình bày ý tưởng nghiên cứ
 
   - USD/VND trễ 1 ngày
 
-**📰 Dữ liệu tin tức tài chính**
+## **📰 Dữ liệu tin tức tài chính**
 
   - **13,739** bài báo tài chính tiếng Việt
 
@@ -51,7 +51,7 @@ Repository này được sử dụng nhằm trình bày ý tưởng nghiên cứ
 
   - **Lọc tin theo keyword domain-specific** (ACB, GDP, CPI, tỷ giá, thị trường…)
 
-**🛠️ Tiền xử lý & Feature Engineering**
+## **🛠️ Tiền xử lý & Feature Engineering**
 
 **Chuẩn hóa:**
 
@@ -67,7 +67,7 @@ Repository này được sử dụng nhằm trình bày ý tưởng nghiên cứ
 
 **Tách tập theo thứ tự thời gian (60/15/25)**
 
-**🧠 Mô hình**
+## **🧠 Mô hình**
   - **Time-Series Encoders:** LSTM, PatchTST, iTransformer
 
   - **Text Embedding Models**: Vietnamese Embedding (AITeamVN) – 1024 dim, Vietnamese Document Embedding – 768 dim
@@ -76,14 +76,14 @@ Repository này được sử dụng nhằm trình bày ý tưởng nghiên cứ
     - Cross-Attention: TS hidden states ↔ News embeddings
     - Concatenation
 
-**⚙️ Thiết lập huấn luyện**
+## **⚙️ Thiết lập huấn luyện**
   - Optimizer: AdamW
   - Loss: MSE
   - Early stopping + Gradient clipping
   - Hyperparameter tuning: Optuna (TPESampler, MedianPruner)
   - Lookback window: L ∈ {12, 24, …, 96}
 
-**📊 Kết quả chính**
+## **📊 Kết quả chính**
 
   - Filtered Features hiệu quả hơn cho H = 1, 4
 
@@ -102,12 +102,11 @@ Repository này được sử dụng nhằm trình bày ý tưởng nghiên cứ
      <img width="770" height="431" alt="image" src="https://github.com/user-attachments/assets/b7890c88-537c-417a-a54c-2e797749b679" />
      <img width="851" height="363" alt="image" src="https://github.com/user-attachments/assets/a6b80f54-f126-4f43-8970-d7b6831793b0" />
 
-**📌 Kết luận**
+## **📌 Kết luận**
 
 Dự án chứng minh rằng tích hợp tin tức tài chính một cách có chọn lọc thông qua cross-attention giúp cải thiện đáng kể độ chính xác dự báo giá cổ phiếu, đặc biệt trong ngắn hạn. Đây là một hướng tiếp cận khả thi cho các hệ thống hỗ trợ quyết định giao dịch và đầu tư.
 
-🇬🇧 README (English)
-Developing Multimodal Models for Stock Price Forecasting
+# 🇬🇧 README (English) Developing Multimodal Models for Stock Price Forecasting
 📖 Overview
 
 This undergraduate IT graduation project proposes a multimodal stock price forecasting framework that integrates historical market time-series data with Vietnamese financial news.
