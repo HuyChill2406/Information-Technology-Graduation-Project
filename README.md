@@ -93,6 +93,7 @@ Repository này được sử dụng nhằm trình bày ý tưởng nghiên cứ
 
   - Cross-Attention ổn định hơn Concatenation, đặc biệt ở H = 1–7
   - **Ảnh kết quả**:
+    
      <img width="814" height="513" alt="image" src="https://github.com/user-attachments/assets/b31bebfd-5378-42f6-8052-2b1298dec184" />
      <img width="833" height="468" alt="image" src="https://github.com/user-attachments/assets/e5fcd6b3-8e32-41d8-aa9a-1bcbeb5d4a4e" />
      <img width="833" height="425" alt="image" src="https://github.com/user-attachments/assets/d5552e00-00ad-4916-ae8e-ff6291f80e3c" />
