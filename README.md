@@ -7,6 +7,11 @@ Dự án này là đồ án tốt nghiệp ngành Công nghệ Thông tin, tập
 
 Khác với các phương pháp chỉ sử dụng dữ liệu giá hoặc kết hợp tin tức một cách hời hợt, dự án đề xuất các chiến lược fusion có định hướng, đặc biệt là cross-attention, nhằm giúp mô hình tự động chọn lọc các tin tức thực sự liên quan đến biến động giá.
 
+**Lưu ý (Note)**
+Dự án hiện đang trong giai đoạn hoàn thiện và đánh giá (grading phase) của đồ án tốt nghiệp. Do đó, toàn bộ mã nguồn chưa được công khai đầy đủ tại thời điểm hiện tại.
+
+Repository này được sử dụng nhằm trình bày ý tưởng nghiên cứu, thiết kế mô hình, quy trình thực nghiệm và kết quả chính của dự án. Mã nguồn hoàn chỉnh sẽ được cập nhật sau khi quá trình chấm điểm chính thức kết thúc.
+
 **🎯 Mục tiêu**
 
 - **Phát triển các mô hình dự báo** giá cổ phiếu **đa phương thức** dựa trên: **Cross-Attention, Feature Concatenation**
@@ -29,81 +34,64 @@ Khác với các phương pháp chỉ sử dụng dữ liệu giá hoặc kết 
     - **Technical indicators** (RSI, MA, MACD, ADX, STOCH, STOCHRSI)
     - **Macroeconomic indicators** (GDP, CPI, USD/VND)
 
-🔒 Chống data leakage:
+**🔒 Chống data leakage:**
 
-GDP trễ 1 năm
+  - GDP trễ 1 năm
 
-CPI trễ 1 tháng
+  - CPI trễ 1 tháng
 
-USD/VND trễ 1 ngày
+  - USD/VND trễ 1 ngày
 
-📰 Dữ liệu tin tức tài chính
+**📰 Dữ liệu tin tức tài chính**
 
-13,739 bài báo tài chính tiếng Việt
+  - **13,739** bài báo tài chính tiếng Việt
 
-Nguồn: Kaggle + VnEconomy
+  - **Nguồn**: Kaggle, VnEconomy,..... và nhiều nguồn khác
 
-Lọc tin theo keyword domain-specific (ACB, GDP, CPI, tỷ giá, thị trường…)
+  - **Lọc tin theo keyword domain-specific** (ACB, GDP, CPI, tỷ giá, thị trường…)
 
-🛠️ Tiền xử lý & Feature Engineering
+**🛠️ Tiền xử lý & Feature Engineering**
 
-Chuẩn hóa:
+**Chuẩn hóa:**
 
-RobustScaler cho feature
+  - **RobustScaler** cho các features khác ngoài giá đóng cửa
 
-StandardScaler cho giá đóng cửa
+  - **StandardScaler** cho giá đóng cửa
 
-So sánh 2 feature sets:
+**So sánh 2 feature sets:**
 
-Filtered Features (10) – tương quan Pearson ≥ 0.3
+  - **Filtered Features** (10) – tương quan Pearson ≥ 0.3
 
-Full Features (19) – giàu tín hiệu cho trung & dài hạn
+  - **Full Features** (19) – giàu tín hiệu cho trung & dài hạn
 
-Tách tập theo thứ tự thời gian (60/15/25)
+**Tách tập theo thứ tự thời gian (60/15/25)**
 
-🧠 Mô hình
-Time-Series Encoders
+**🧠 Mô hình**
+  - **Time-Series Encoders:** LSTM, PatchTST, iTransformer
 
-LSTM
+  - **Text Embedding Models**: Vietnamese Embedding (AITeamVN) – 1024 dim, Vietnamese Document Embedding – 768 dim
 
-PatchTST
+  - **Multimodal Fusion**:
+    - Cross-Attention: TS hidden states ↔ News embeddings
+    - Concatenation
 
-iTransformer
+**⚙️ Thiết lập huấn luyện**
+  - Optimizer: AdamW
+  - Loss: MSE
+  - Early stopping + Gradient clipping
+  - Hyperparameter tuning: Optuna (TPESampler, MedianPruner)
+  - Lookback window: L ∈ {12, 24, …, 96}
 
-Text Embedding Models
+**📊 Kết quả chính**
 
-Vietnamese Embedding (AITeamVN) – 1024 dim
+  - Filtered Features hiệu quả hơn cho H = 1, 4
 
-Vietnamese Document Embedding – 768 dim
+  - Full Features vượt trội cho H ≥ 7
 
-Multimodal Fusion
+  - Multimodal (TS + News) cải thiện MAE đến ~9% ở ngắn & trung hạn
 
-Cross-Attention:
-TS hidden states ↔ News embeddings
+  - Cross-Attention ổn định hơn Concatenation, đặc biệt ở H = 1–7
 
-Concatenation (baseline)
-
-⚙️ Thiết lập huấn luyện
-
-Optimizer: AdamW
-
-Loss: MSE
-
-Early stopping + Gradient clipping
-
-Hyperparameter tuning: Optuna (TPESampler, MedianPruner)
-
-Lookback window: L ∈ {12, 24, …, 96}
-
-📊 Kết quả chính
-
-Filtered Features hiệu quả hơn cho H = 1, 4
-
-Full Features vượt trội cho H ≥ 7
-
-Multimodal (TS + News) cải thiện MAE đến ~9% ở ngắn & trung hạn
-
-Cross-Attention ổn định hơn Concatenation, đặc biệt ở H = 1–7
 
 📌 Kết luận
 
