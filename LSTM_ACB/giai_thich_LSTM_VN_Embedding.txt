@@ -1,0 +1,252 @@
+================================================================================
+                    GIẢI THÍCH FILE LSTM_VN_Embedding_ACB.ipynb
+================================================================================
+Ngày tạo: 2026-02-02
+
+================================================================================
+PHẦN 1: TỔNG QUAN NOTEBOOK
+================================================================================
+
+File này là một Jupyter Notebook về LSTM + Vietnamese Embedding Multimodal Stock Prediction.
+
+KIẾN TRÚC MÔ HÌNH:
+- Text Encoder: Sử dụng model AITeamVN/Vietnamese_Embedding từ HuggingFace để encode text tin tức tiếng Việt
+- Time Series Encoder: LSTM để encode các đặc trưng price/volume
+- Fusion: Kết hợp embeddings từ cả 2 encoder bằng Concatenation hoặc Cross Attention (query=lstm_out, key=value=text)
+- Decoder: Fully Connected layers để dự đoán nhiều horizons
+
+TEXT SELECTION LOGIC:
+- Sử dụng tin tức từ 3 ngày gần nhất (H, H-1, H-2) thay vì chỉ 1 ngày
+- Áp dụng average pooling cho mỗi ngày để tổng hợp nhiều bài tin trong cùng ngày
+- Sử dụng sinusoidal positional encoding để giữ thứ tự thời gian của 3 ngày
+
+CÁC BƯỚC CHÍNH TRONG NOTEBOOK:
+
+1. Install and Import Libraries
+   - torch, transformers, sentence-transformers
+   - sklearn, pandas, numpy, matplotlib
+
+2. Load Vietnamese Embedding Model
+   - Model: AITeamVN/Vietnamese_Embedding 
+   - Embedding dimension: 1024
+   - Tùy chọn freeze model parameters
+
+3. Load Datasets
+   - Dữ liệu tin tức: merged_kaggle_collected_news.csv
+   - News data shape: (13739, 5) 
+   - Date range: 2019-12-16 đến 2025-10-20
+   - Columns: ['date', 'content', 'content_clean', 'title', 'url']
+
+
+================================================================================
+PHẦN 2: GIẢI THÍCH CROSS ATTENTION CHI TIẾT
+================================================================================
+
+BƯỚC 1: TEXT ENCODING (Vietnamese Embedding)
+─────────────────────────────────────────────
+Mỗi tin tức văn bản → AITeamVN/Vietnamese_Embedding → Vector (1024-dim)
+
+
+BƯỚC 2: AVERAGE POOLING CHO MỖI NGÀY
+─────────────────────────────────────────────
+Vì một ngày có thể có nhiều tin tức (trung bình 6.45 tin/ngày), nên:
+
+    # Encode tất cả tin tức trong 1 ngày
+    embeddings = model.encode(valid_articles)  # (N bài tin, 1024)
+
+    # Average pooling → 1 vector đại diện cho ngày đó
+    avg_embedding = embeddings.mean(dim=0)  # (1024,)
+
+
+BƯỚC 3: LẤY 3 NGÀY → 3 VECTORS
+─────────────────────────────────────────────
+    # Với ngày dự đoán H, lấy tin tức từ 3 ngày: H, H-1, H-2
+    text_emb = get_multiday_news_embeddings(target_date, ...)
+    # Shape: (3, 1024)
+    #   Index 0: Embedding ngày H (gần nhất)
+    #   Index 1: Embedding ngày H-1
+    #   Index 2: Embedding ngày H-2
+
+
+BƯỚC 4: ADD POSITIONAL ENCODING (Sinusoidal)
+─────────────────────────────────────────────
+    # Để model biết thứ tự thời gian của 3 ngày
+    news_with_pos = self.positional_encoding(x_text)
+    # Shape vẫn là: (batch, 3, 1024)
+    # Nhưng giờ mỗi vector đã có thông tin vị trí (ngày nào gần/xa hơn)
+
+
+BƯỚC 5: PROJECT QUA FFN (giảm chiều)
+─────────────────────────────────────────────
+    # Giảm từ 1024 → hidden_dim (ví dụ 32)
+    news_proj = self.news_ffn(news_with_pos)
+    # Shape: (batch, 3, 32)
+
+
+BƯỚC 6: CROSS-ATTENTION (PHẦN QUAN TRỌNG!)
+─────────────────────────────────────────────
+    Query  = LSTM output từ time series (giá cổ phiếu) → Shape: (batch, seq_len, 32)
+    Key    = News embeddings (3 ngày tin tức) → Shape: (batch, 3, 32)  
+    Value  = News embeddings (3 ngày tin tức) → Shape: (batch, 3, 32)
+
+Ý nghĩa:
+    "Market (LSTM) hỏi tin tức: Trong 3 ngày tin tức này, 
+     tin nào liên quan nhất đến biến động giá hiện tại?"
+
+    cross_attn_out, attention_weights = self.cross_attention(
+        query=lstm_out,      # (batch, seq_len, hidden_dim) - thị trường hỏi
+        key=news_proj,       # (batch, 3, hidden_dim) - tin tức trả lời
+        value=news_proj      # (batch, 3, hidden_dim)
+    )
+    # attention_weights: (batch, seq_len, 3) - trọng số attention cho 3 ngày
+
+
+BƯỚC 7: FUSION & PREDICTION
+─────────────────────────────────────────────
+    # Concatenate ts_embedding + cross_attn_embedding
+    fused = torch.cat([ts_embedding, cross_attn_embedding], dim=-1)
+    # → Decoder → predictions
+
+
+================================================================================
+TÓM TẮT FLOW VISUAL
+================================================================================
+
+┌──────────────────────────────────────────────────────────────────┐
+│                    TEXT BRANCH (News)                            │
+├──────────────────────────────────────────────────────────────────┤
+│                                                                  │
+│  Ngày H:    [Tin 1, Tin 2, ...] → Vietnamese_Embedding → AvgPool → Emb_H   │
+│  Ngày H-1:  [Tin 1, Tin 2, ...] → Vietnamese_Embedding → AvgPool → Emb_H-1 │
+│  Ngày H-2:  [Tin 1, Tin 2, ...] → Vietnamese_Embedding → AvgPool → Emb_H-2 │
+│                                                                  │
+│  Stack → (3, 1024) → Add Positional Encoding → FFN → (3, 32)     │
+│                              ↓                                   │
+│                        NEWS_PROJ (Key, Value)                    │
+└──────────────────────────────────────────────────────────────────┘
+                               ↘
+                          CROSS-ATTENTION
+                               ↙
+┌──────────────────────────────────────────────────────────────────┐
+│                TIME SERIES BRANCH (Price/Volume)                 │
+├──────────────────────────────────────────────────────────────────┤
+│                                                                  │
+│  [36 ngày data] → LSTM → lstm_out (Query) → (batch, 36, 32)      │
+│                                                                  │
+└──────────────────────────────────────────────────────────────────┘
+                               ↓
+                     Cross-Attention Output
+                               ↓
+                    ┌─────────────────────┐
+                    │ FUSION (Concat)     │
+                    │ [ts_emb | attn_out] │
+                    └─────────────────────┘
+                               ↓
+                         MLP Decoder
+                               ↓
+                    Predictions (6 horizons)
+                    [H+1, H+4, H+7, H+10, H+14, H+21]
+
+
+================================================================================
+KHÁC BIỆT GIỮA CROSS-ATTENTION VÀ CONCAT (Simple)
+================================================================================
+
+| Aspect           | Cross-Attention                            | Concat (Simple)                    |
+|------------------|--------------------------------------------|------------------------------------|
+| Cách xử lý 3 ngày| Học trọng số attention động cho từng ngày | Average pool → 1 vector            |
+| Tính linh hoạt   | Cao - tự học ngày nào quan trọng          | Cố định - coi 3 ngày như nhau      |
+| Phức tạp         | Phức tạp hơn                               | Đơn giản hơn                       |
+
+
+================================================================================
+PHẦN 3: LSTM OUTPUTS - lstm_out vs hidden
+================================================================================
+
+Trong code:
+    lstm_out, (hidden, cell) = self.lstm_encoder(x_ts)
+    ts_embedding = hidden[-1]  # Lấy hidden state của layer cuối
+
+
+1. lstm_out - Chuỗi outputs tại mỗi timestep
+─────────────────────────────────────────────
+    Shape: (batch_size, seq_len, hidden_dim)
+           ví dụ: (32, 36, 32)
+
+    Input sequence:  [t1, t2, t3, ..., t35, t36]   (36 ngày)
+                      ↓   ↓   ↓         ↓    ↓
+    LSTM outputs:   [h1, h2, h3, ..., h35, h36]   (36 hidden states)
+
+    lstm_out chứa TẤT CẢ hidden states cho mọi timestep
+    → tức là bạn có 36 vectors, mỗi vector đại diện cho "hiểu biết" của LSTM tại thời điểm đó.
+
+
+2. hidden[-1] = ts_embedding - Trạng thái ẩn cuối cùng
+─────────────────────────────────────────────
+    Shape: (batch_size, hidden_dim)
+           ví dụ: (32, 32)
+
+    LSTM có num_layers=3:
+      - hidden[0]: hidden state của layer 1
+      - hidden[1]: hidden state của layer 2  
+      - hidden[-1] = hidden[2]: hidden state của layer CUỐI CÙNG ← Cái này được dùng!
+
+    Quan trọng: hidden[-1] là hidden state tại timestep cuối cùng (t36) của layer cuối cùng.
+    Nó "tóm tắt" toàn bộ chuỗi input thành 1 vector duy nhất.
+
+
+SO SÁNH VISUAL
+─────────────────────────────────────────────
+
+                        LSTM với seq_len=36, hidden_dim=32, num_layers=3
+                        ════════════════════════════════════════════════
+
+Input:     [x1]──[x2]──[x3]──...──[x35]──[x36]
+            │     │     │           │      │
+Layer 1:   h1¹───h2¹───h3¹──...───h35¹──h36¹  → hidden[0] = h36¹
+            │     │     │           │      │
+Layer 2:   h1²───h2²───h3²──...───h35²──h36²  → hidden[1] = h36²
+            │     │     │           │      │
+Layer 3:   h1³───h2³───h3³──...───h35³──h36³  → hidden[2] = h36³ ← ts_embedding
+            ↓     ↓     ↓           ↓      ↓
+lstm_out: [h1³, h2³, h3³, ..., h35³, h36³]   ← (36 vectors từ layer cuối)
+
+
+TẠI SAO DÙNG CẢ 2 TRONG CROSS-ATTENTION?
+─────────────────────────────────────────────
+
+    # Query = lstm_out (toàn bộ sequence)
+    cross_attn_out, attention_weights = self.cross_attention(
+        query=lstm_out,      # (batch, 36, 32) - 36 timesteps
+        key=news_proj,       # (batch, 3, 32)  - 3 ngày tin
+        value=news_proj      
+    )
+
+Lý do:
+- lstm_out (36 timesteps) làm Query → Mỗi timestep trong chuỗi giá có thể "hỏi" 
+  3 ngày tin tức → Tạo ra sự tương tác chi tiết hơn
+- ts_embedding (1 vector) được dùng để concat cuối cùng → Đại diện tổng thể cho toàn bộ sequence
+
+    # Lấy output từ timestep cuối của cross-attention
+    cross_attn_embedding = cross_attn_out[:, -1, :]  # (batch, 32)
+
+    # Concat với ts_embedding
+    fused = torch.cat([ts_embedding, cross_attn_embedding], dim=-1)  # (batch, 64)
+
+
+================================================================================
+TÓM TẮT BẢNG
+================================================================================
+
+| Tên                      | Shape                      | Ý nghĩa                                                    |
+|--------------------------|----------------------------|------------------------------------------------------------|
+| lstm_out                 | (batch, seq_len, hidden)   | Hidden states của TẤT CẢ 36 timesteps (layer cuối)         |
+| hidden                   | (num_layers, batch, hidden)| Hidden states tại TIMESTEP CUỐI của mỗi layer              |
+| hidden[-1] = ts_embedding| (batch, hidden)            | Hidden state của LAYER CUỐI, TIMESTEP CUỐI - tóm tắt chuỗi |
+| lstm_out[:, -1, :]       | (batch, hidden)            | GIỐNG HỆT hidden[-1]                                       |
+
+Note: lstm_out[:, -1, :] và hidden[-1] là GIỐNG NHAU về giá trị!
+
+================================================================================
+                              HẾT FILE GIẢI THÍCH
+================================================================================
