@@ -1,0 +1,213 @@
+iTransformer_ACB_Fullfeatures using time series only ( L = 12):
+
+=== TEST SET RESULTS (ACTUAL PRICE - VND) === 
+H=  1: MAE=369.29 VND | RMSE=520.90 VND | MAE_norm=0.01505 | RMSE_norm=0.02123 | MAPE=1.52% | R2=0.89137 
+H=  4: MAE=570.62 VND | RMSE=876.75 VND | MAE_norm=0.02325 | RMSE_norm=0.03573 | MAPE=2.32% | R2=0.69301 
+H=  7: MAE=700.12 VND | RMSE=1,048.98 VND | MAE_norm=0.02852 | RMSE_norm=0.04273 | MAPE=2.88% | R2=0.56241 
+H= 10: MAE=799.74 VND | RMSE=1,196.79 VND | MAE_norm=0.03256 | RMSE_norm=0.04872 | MAPE=3.27% | R2=0.43292 
+H= 14: MAE=965.01 VND | RMSE=1,390.14 VND | MAE_norm=0.03925 | RMSE_norm=0.05655 | MAPE=3.95% | R2=0.24789 
+H= 21: MAE=1,274.34 VND | RMSE=1,685.27 VND | MAE_norm=0.05174 | RMSE_norm=0.06843 | MAPE=5.20% | R2=-0.07398
+
+
+
+iTransformer_ACB (Filttered Features, L = 12):
+
+=== TEST SET RESULTS (ACTUAL PRICE - VND) === 
+H=  1: MAE=425.86 VND | RMSE=551.81 VND | MAE_norm=0.01736 | RMSE_norm=0.02249 | MAPE=1.73% | R2=0.87809 
+H=  4: MAE=515.45 VND | RMSE=839.53 VND | MAE_norm=0.02101 | RMSE_norm=0.03421 | MAPE=2.11% | R2=0.71853 
+H=  7: MAE=772.32 VND | RMSE=1,087.88 VND | MAE_norm=0.03146 | RMSE_norm=0.04431 | MAPE=3.13% | R2=0.52935 
+H= 10: MAE=773.61 VND | RMSE=1,172.77 VND | MAE_norm=0.03150 | RMSE_norm=0.04775 | MAPE=3.17% | R2=0.45546 
+H= 14: MAE=1,036.59 VND | RMSE=1,439.46 VND | MAE_norm=0.04216 | RMSE_norm=0.05855 | MAPE=4.20% | R2=0.19357 
+H= 21: MAE=1,425.47 VND | RMSE=1,813.48 VND | MAE_norm=0.05788 | RMSE_norm=0.07363 | MAPE=5.76% | R2=-0.24361
+
+
+
+iTransformer + vietnamese-document-embedding ( timeseries + news, Full features, L = 12, cross attention):
+
+=== TEST SET RESULTS (ACTUAL PRICE - VND) === 
+H=  1: MAE=272.60 VND | RMSE=456.87 VND | MAE_norm=0.01111 | RMSE_norm=0.01862 | MAPE=1.11% | R2=0.91643 
+H=  4: MAE=516.21 VND | RMSE=834.37 VND | MAE_norm=0.02104 | RMSE_norm=0.03400 | MAPE=2.11% | R2=0.72198 
+H=  7: MAE=727.00 VND | RMSE=1,049.97 VND | MAE_norm=0.02961 | RMSE_norm=0.04277 | MAPE=2.96% | R2=0.56158 
+H= 10: MAE=859.73 VND | RMSE=1,245.42 VND | MAE_norm=0.03500 | RMSE_norm=0.05070 | MAPE=3.53% | R2=0.38590 
+H= 14: MAE=1,053.85 VND | RMSE=1,432.79 VND | MAE_norm=0.04287 | RMSE_norm=0.05828 | MAPE=4.28% | R2=0.20103 
+H= 21: MAE=1,267.39 VND | RMSE=1,695.02 VND | MAE_norm=0.05146 | RMSE_norm=0.06882 | MAPE=5.19% | R2=-0.08644
+
+
+
+iTransformer + vietnamese-document-embedding ( timeseries + news, Full features, L = 12, fusion concat normally)
+
+=== TEST SET RESULTS (ACTUAL PRICE - VND) === 
+H=  1: MAE=581.67 VND | RMSE=675.21 VND | MAE_norm=0.02371 | RMSE_norm=0.02752 | MAPE=2.38% | R2=0.81747 
+H=  4: MAE=562.53 VND | RMSE=878.22 VND | MAE_norm=0.02292 | RMSE_norm=0.03579 | MAPE=2.31% | R2=0.69198 
+H=  7: MAE=652.96 VND | RMSE=1,006.79 VND | MAE_norm=0.02660 | RMSE_norm=0.04101 | MAPE=2.67% | R2=0.59690 
+H= 10: MAE=843.37 VND | RMSE=1,201.00 VND | MAE_norm=0.03434 | RMSE_norm=0.04890 | MAPE=3.44% | R2=0.42892 
+H= 14: MAE=966.48 VND | RMSE=1,402.72 VND | MAE_norm=0.03931 | RMSE_norm=0.05706 | MAPE=3.95% | R2=0.23421 
+H= 21: MAE=1,338.33 VND | RMSE=1,747.96 VND | MAE_norm=0.05434 | RMSE_norm=0.07097 | MAPE=5.46% | R2=-0.15537
+
+
+
+iTransformer + Vietnamese_Embedding (time series + news, Full features, L = 24, fusion concat normally)
+
+=== TEST SET RESULTS (ACTUAL PRICE - VND) === 
+H=  1: MAE=308.77 VND | RMSE=479.61 VND | MAE_norm=0.01259 | RMSE_norm=0.01955 | MAPE=1.26% | R2=0.91112 
+H=  4: MAE=578.31 VND | RMSE=890.87 VND | MAE_norm=0.02357 | RMSE_norm=0.03630 | MAPE=2.36% | R2=0.69452 
+H=  7: MAE=646.17 VND | RMSE=996.07 VND | MAE_norm=0.02632 | RMSE_norm=0.04057 | MAPE=2.64% | R2=0.61963 
+H= 10: MAE=809.15 VND | RMSE=1,227.54 VND | MAE_norm=0.03294 | RMSE_norm=0.04997 | MAPE=3.31% | R2=0.42440 
+H= 14: MAE=1,132.21 VND | RMSE=1,517.41 VND | MAE_norm=0.04603 | RMSE_norm=0.06169 | MAPE=4.58% | R2=0.13367 
+H= 21: MAE=1,351.98 VND | RMSE=1,781.93 VND | MAE_norm=0.05485 | RMSE_norm=0.07229 | MAPE=5.48% | R2=-0.16186
+
+
+
+iTransformer + Vietnamese_Embedding (time series + news, Full features, L = 96, cross attention)
+
+=== TEST SET RESULTS (ACTUAL PRICE - VND) === 
+H=  1: MAE=252.78 VND | RMSE=475.83 VND | MAE_norm=0.01028 | RMSE_norm=0.01935 | MAPE=1.03% | R2=0.93011 
+H=  4: MAE=613.53 VND | RMSE=921.12 VND | MAE_norm=0.02495 | RMSE_norm=0.03746 | MAPE=2.49% | R2=0.73758 
+H=  7: MAE=763.36 VND | RMSE=1,094.97 VND | MAE_norm=0.03104 | RMSE_norm=0.04453 | MAPE=3.09% | R2=0.62913 
+H= 10: MAE=926.93 VND | RMSE=1,282.41 VND | MAE_norm=0.03770 | RMSE_norm=0.05215 | MAPE=3.74% | R2=0.49085 
+H= 14: MAE=1,120.72 VND | RMSE=1,512.83 VND | MAE_norm=0.04557 | RMSE_norm=0.06151 | MAPE=4.50% | R2=0.29663 
+H= 21: MAE=1,432.78 VND | RMSE=1,839.92 VND | MAE_norm=0.05820 | RMSE_norm=0.07474 | MAPE=5.82% | R2=-0.01892
+
+
+
+LSTM_ACB_FullFeatures (time series only, L = 60):
+
+=== TEST SET RESULTS (ACTUAL PRICE - VND) === 
+H=  1: MAE=290.25 VND | RMSE=501.96 VND | MAE_norm=0.01181 | RMSE_norm=0.02043 | MAPE=1.17% | R2=0.91286 
+H=  4: MAE=557.55 VND | RMSE=900.45 VND | MAE_norm=0.02267 | RMSE_norm=0.03661 | MAPE=2.28% | R2=0.71908 
+H=  7: MAE=687.69 VND | RMSE=1,081.56 VND | MAE_norm=0.02794 | RMSE_norm=0.04394 | MAPE=2.81% | R2=0.59496 
+H= 10: MAE=852.26 VND | RMSE=1,248.24 VND | MAE_norm=0.03459 | RMSE_norm=0.05067 | MAPE=3.48% | R2=0.46090 
+H= 14: MAE=1,015.75 VND | RMSE=1,472.11 VND | MAE_norm=0.04118 | RMSE_norm=0.05968 | MAPE=4.15% | R2=0.26154 
+H= 21: MAE=1,324.24 VND | RMSE=1,787.84 VND | MAE_norm=0.05358 | RMSE_norm=0.07234 | MAPE=5.40% | R2=-0.05941
+
+
+
+LSTM_ACB (filttered features, time series only, L = 48):
+
+=== TEST SET RESULTS (ACTUAL PRICE - VND) === 
+H=  1: MAE=239.76 VND | RMSE=451.22 VND | MAE_norm=0.00976 | RMSE_norm=0.01838 | MAPE=0.97% | R2=0.92695 
+H=  4: MAE=526.22 VND | RMSE=867.49 VND | MAE_norm=0.02142 | RMSE_norm=0.03531 | MAPE=2.15% | R2=0.73077 
+H=  7: MAE=753.61 VND | RMSE=1,121.43 VND | MAE_norm=0.03066 | RMSE_norm=0.04562 | MAPE=3.09% | R2=0.55159 
+H= 10: MAE=877.54 VND | RMSE=1,291.06 VND | MAE_norm=0.03568 | RMSE_norm=0.05249 | MAPE=3.60% | R2=0.40804 
+H= 14: MAE=1,025.78 VND | RMSE=1,478.83 VND | MAE_norm=0.04164 | RMSE_norm=0.06004 | MAPE=4.20% | R2=0.23236 
+H= 21: MAE=1,330.33 VND | RMSE=1,829.44 VND | MAE_norm=0.05385 | RMSE_norm=0.07406 | MAPE=5.49% | R2=-0.15442
+
+
+
+LSTM + vietnamese-document-embedding (timeseries + news, full features, L = 48, cross attention):
+
+=== TEST SET RESULTS (ACTUAL PRICE - VND) === 
+H=  1: MAE=402.74 VND | RMSE=566.68 VND | MAE_norm=0.01640 | RMSE_norm=0.02308 | MAPE=1.63% | R2=0.88478 
+H=  4: MAE=531.76 VND | RMSE=865.18 VND | MAE_norm=0.02165 | RMSE_norm=0.03522 | MAPE=2.17% | R2=0.73220 
+H=  7: MAE=674.04 VND | RMSE=1,052.37 VND | MAE_norm=0.02742 | RMSE_norm=0.04281 | MAPE=2.75% | R2=0.60512 
+H= 10: MAE=837.10 VND | RMSE=1,237.22 VND | MAE_norm=0.03404 | RMSE_norm=0.05030 | MAPE=3.42% | R2=0.45639 
+H= 14: MAE=1,042.52 VND | RMSE=1,454.78 VND | MAE_norm=0.04232 | RMSE_norm=0.05906 | MAPE=4.24% | R2=0.25713 
+H= 21: MAE=1,335.39 VND | RMSE=1,784.09 VND | MAE_norm=0.05406 | RMSE_norm=0.07222 | MAPE=5.49% | R2=-0.09790
+
+
+
+LSTM + vietnamese-document-embedding (timeseries + news, full features, L = 24, fussion concatenate normally):
+
+=== TEST SET RESULTS (ACTUAL PRICE - VND) === 
+H=  1: MAE=287.45 VND | RMSE=470.67 VND | MAE_norm=0.01172 | RMSE_norm=0.01919 | MAPE=1.17% | R2=0.91440 
+H=  4: MAE=562.97 VND | RMSE=879.25 VND | MAE_norm=0.02294 | RMSE_norm=0.03583 | MAPE=2.31% | R2=0.70243 
+H=  7: MAE=650.39 VND | RMSE=1,018.62 VND | MAE_norm=0.02649 | RMSE_norm=0.04149 | MAPE=2.66% | R2=0.60222 
+H= 10: MAE=795.27 VND | RMSE=1,205.69 VND | MAE_norm=0.03237 | RMSE_norm=0.04908 | MAPE=3.26% | R2=0.44471 
+H= 14: MAE=1,018.17 VND | RMSE=1,454.92 VND | MAE_norm=0.04139 | RMSE_norm=0.05915 | MAPE=4.18% | R2=0.20357 
+H= 21: MAE=1,302.10 VND | RMSE=1,792.98 VND | MAE_norm=0.05283 | RMSE_norm=0.07274 | MAPE=5.38% | R2=-0.17632
+
+
+
+LSTM + Vietnamese_Embedding (time series + news, full features, L = 60, cross attention):
+
+=== TEST SET RESULTS (ACTUAL PRICE - VND) === 
+H=  1: MAE=291.87 VND | RMSE=488.94 VND | MAE_norm=0.01188 | RMSE_norm=0.01990 | MAPE=1.19% | R2=0.91732 
+H=  4: MAE=538.16 VND | RMSE=886.28 VND | MAE_norm=0.02188 | RMSE_norm=0.03604 | MAPE=2.20% | R2=0.72785 
+H=  7: MAE=802.04 VND | RMSE=1,168.10 VND | MAE_norm=0.03258 | RMSE_norm=0.04745 | MAPE=3.29% | R2=0.52756 
+H= 10: MAE=855.49 VND | RMSE=1,283.29 VND | MAE_norm=0.03472 | RMSE_norm=0.05209 | MAPE=3.50% | R2=0.43020 
+H= 14: MAE=1,213.45 VND | RMSE=1,650.71 VND | MAE_norm=0.04919 | RMSE_norm=0.06692 | MAPE=4.99% | R2=0.07149 
+H= 21: MAE=1,488.74 VND | RMSE=1,994.33 VND | MAE_norm=0.06024 | RMSE_norm=0.08069 | MAPE=6.16% | R2=-0.31827
+
+
+
+LSTM + Vietnamese_Embedding (time series + news, full features, L = 36, fusion concatenate normally):
+
+=== TEST SET RESULTS (ACTUAL PRICE - VND) === 
+H=  1: MAE=420.52 VND | RMSE=551.17 VND | MAE_norm=0.01713 | RMSE_norm=0.02246 | MAPE=1.72% | R2=0.88675 
+H=  4: MAE=709.27 VND | RMSE=960.62 VND | MAE_norm=0.02888 | RMSE_norm=0.03912 | MAPE=2.89% | R2=0.65715 
+H=  7: MAE=995.57 VND | RMSE=1,252.25 VND | MAE_norm=0.04052 | RMSE_norm=0.05097 | MAPE=4.04% | R2=0.41964 
+H= 10: MAE=1,224.68 VND | RMSE=1,497.95 VND | MAE_norm=0.04981 | RMSE_norm=0.06093 | MAPE=4.96% | R2=0.17238 
+H= 14: MAE=1,464.09 VND | RMSE=1,770.88 VND | MAE_norm=0.05949 | RMSE_norm=0.07196 | MAPE=5.90% | R2=-0.13808 
+H= 21: MAE=1,868.06 VND | RMSE=2,218.71 VND | MAE_norm=0.07575 | RMSE_norm=0.08997 | MAPE=7.52% | R2=-0.73865
+
+
+
+PatchTST_ACB_Fullfts (time series only, full features, L =24):
+
+=== TEST SET RESULTS (ACTUAL PRICE - VND) === 
+H=  1: MAE=267.19 VND | RMSE=458.61 VND | MAE_norm=0.01089 | RMSE_norm=0.01869 | MAPE=1.09% | R2=0.91873 
+H=  4: MAE=563.12 VND | RMSE=863.76 VND | MAE_norm=0.02295 | RMSE_norm=0.03520 | MAPE=2.30% | R2=0.71283 
+H=  7: MAE=789.97 VND | RMSE=1,112.15 VND | MAE_norm=0.03218 | RMSE_norm=0.04530 | MAPE=3.24% | R2=0.52581 
+H= 10: MAE=912.03 VND | RMSE=1,263.95 VND | MAE_norm=0.03712 | RMSE_norm=0.05145 | MAPE=3.74% | R2=0.38975 
+H= 14: MAE=1,211.98 VND | RMSE=1,589.52 VND | MAE_norm=0.04927 | RMSE_norm=0.06462 | MAPE=4.98% | R2=0.04939 
+H= 21: MAE=1,408.68 VND | RMSE=1,928.68 VND | MAE_norm=0.05715 | RMSE_norm=0.07825 | MAPE=5.83% | R2=-0.36112
+
+
+
+PatchTST_ACB (time series only, filttered features, L =36):
+
+=== TEST SET RESULTS (ACTUAL PRICE - VND) === 
+H=  1: MAE=233.95 VND | RMSE=441.85 VND | MAE_norm=0.00953 | RMSE_norm=0.01800 | MAPE=0.95% | R2=0.92722 
+H=  4: MAE=523.57 VND | RMSE=858.43 VND | MAE_norm=0.02132 | RMSE_norm=0.03496 | MAPE=2.14% | R2=0.72622 
+H=  7: MAE=692.77 VND | RMSE=1,063.20 VND | MAE_norm=0.02820 | RMSE_norm=0.04327 | MAPE=2.84% | R2=0.58164 
+H= 10: MAE=824.82 VND | RMSE=1,214.23 VND | MAE_norm=0.03355 | RMSE_norm=0.04939 | MAPE=3.37% | R2=0.45620 
+H= 14: MAE=1,021.35 VND | RMSE=1,462.15 VND | MAE_norm=0.04150 | RMSE_norm=0.05942 | MAPE=4.19% | R2=0.22415 
+H= 21: MAE=1,298.83 VND | RMSE=1,772.93 VND | MAE_norm=0.05267 | RMSE_norm=0.07189 | MAPE=5.35% | R2=-0.11018
+
+
+
+PatchTsT + vietnamese-document-embedding (time series + news, full features, L = 48, cross attention )
+
+=== TEST SET RESULTS (ACTUAL PRICE - VND) === 
+H=  1: MAE=250.81 VND | RMSE=458.79 VND | MAE_norm=0.01021 | RMSE_norm=0.01868 | MAPE=1.02% | R2=0.92447 
+H=  4: MAE=547.23 VND | RMSE=878.77 VND | MAE_norm=0.02228 | RMSE_norm=0.03577 | MAPE=2.24% | R2=0.72373 
+H=  7: MAE=699.92 VND | RMSE=1,076.97 VND | MAE_norm=0.02848 | RMSE_norm=0.04381 | MAPE=2.87% | R2=0.58644 
+H= 10: MAE=960.73 VND | RMSE=1,333.16 VND | MAE_norm=0.03906 | RMSE_norm=0.05421 | MAPE=3.94% | R2=0.36881 
+H= 14: MAE=1,228.79 VND | RMSE=1,644.97 VND | MAE_norm=0.04989 | RMSE_norm=0.06678 | MAPE=5.04% | R2=0.05020 
+H= 21: MAE=1,542.80 VND | RMSE=2,032.47 VND | MAE_norm=0.06245 | RMSE_norm=0.08228 | MAPE=6.36% | R2=-0.42487
+
+
+
+PatchTsT + vietnamese-document-embedding (time series + news, full features, L = 24, fusion concatenate normally )
+
+=== TEST SET RESULTS (ACTUAL PRICE - VND) === 
+H=  1: MAE=271.20 VND | RMSE=459.91 VND | MAE_norm=0.01105 | RMSE_norm=0.01875 | MAPE=1.10% | R2=0.91827 
+H=  4: MAE=529.24 VND | RMSE=857.16 VND | MAE_norm=0.02157 | RMSE_norm=0.03493 | MAPE=2.17% | R2=0.71720 
+H=  7: MAE=697.36 VND | RMSE=1,063.05 VND | MAE_norm=0.02840 | RMSE_norm=0.04330 | MAPE=2.86% | R2=0.56676 
+H= 10: MAE=873.95 VND | RMSE=1,271.90 VND | MAE_norm=0.03557 | RMSE_norm=0.05177 | MAPE=3.59% | R2=0.38205 
+H= 14: MAE=1,093.27 VND | RMSE=1,513.60 VND | MAE_norm=0.04445 | RMSE_norm=0.06153 | MAPE=4.48% | R2=0.13802 
+H= 21: MAE=1,474.79 VND | RMSE=1,913.15 VND | MAE_norm=0.05983 | RMSE_norm=0.07762 | MAPE=6.04% | R2=-0.33928
+
+
+
+PatchTST + Vietnamese_Embedding (time series + news, full features, L =24, cross attention):
+
+=== TEST SET RESULTS (ACTUAL PRICE - VND) === 
+H=  1: MAE=243.25 VND | RMSE=447.21 VND | MAE_norm=0.00992 | RMSE_norm=0.01823 | MAPE=0.99% | R2=0.92272 
+H=  4: MAE=539.45 VND | RMSE=859.35 VND | MAE_norm=0.02198 | RMSE_norm=0.03502 | MAPE=2.21% | R2=0.71575 
+H=  7: MAE=694.33 VND | RMSE=1,059.68 VND | MAE_norm=0.02828 | RMSE_norm=0.04316 | MAPE=2.85% | R2=0.56950 
+H= 10: MAE=865.19 VND | RMSE=1,247.42 VND | MAE_norm=0.03522 | RMSE_norm=0.05078 | MAPE=3.55% | R2=0.40560 
+H= 14: MAE=1,105.36 VND | RMSE=1,526.17 VND | MAE_norm=0.04494 | RMSE_norm=0.06204 | MAPE=4.54% | R2=0.12365 
+H= 21: MAE=1,374.57 VND | RMSE=1,835.23 VND | MAE_norm=0.05577 | RMSE_norm=0.07446 | MAPE=5.66% | R2=-0.23241
+
+
+
+PatchTST + Vietnamese_Embedding (time series + news, full features, L =24, fusion concatenate normally):
+
+=== TEST SET RESULTS (ACTUAL PRICE - VND) === 
+H=  1: MAE=243.61 VND | RMSE=440.88 VND | MAE_norm=0.00993 | RMSE_norm=0.01797 | MAPE=0.99% | R2=0.92489 
+H=  4: MAE=571.39 VND | RMSE=879.61 VND | MAE_norm=0.02328 | RMSE_norm=0.03584 | MAPE=2.33% | R2=0.70219 
+H=  7: MAE=767.67 VND | RMSE=1,112.57 VND | MAE_norm=0.03127 | RMSE_norm=0.04532 | MAPE=3.14% | R2=0.52545 
+H= 10: MAE=918.98 VND | RMSE=1,304.21 VND | MAE_norm=0.03741 | RMSE_norm=0.05309 | MAPE=3.75% | R2=0.35025 
+H= 14: MAE=1,142.67 VND | RMSE=1,561.77 VND | MAE_norm=0.04645 | RMSE_norm=0.06349 | MAPE=4.68% | R2=0.08229 
+H= 21: MAE=1,568.26 VND | RMSE=1,995.78 VND | MAE_norm=0.06362 | RMSE_norm=0.08097 | MAPE=6.43% | R2=-0.45746
