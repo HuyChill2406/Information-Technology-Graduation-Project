@@ -7,12 +7,6 @@ Dự án này là đồ án tốt nghiệp ngành Công nghệ Thông tin, tập
 
 Khác với các phương pháp chỉ sử dụng dữ liệu giá hoặc kết hợp tin tức một cách hời hợt, dự án đề xuất các chiến lược fusion có định hướng, đặc biệt là cross-attention, nhằm giúp mô hình tự động chọn lọc các tin tức thực sự liên quan đến biến động giá.
 
-## **Lưu ý (Note)**
-
-Dự án hiện đang trong giai đoạn hoàn thiện và đánh giá (grading phase) của đồ án tốt nghiệp. Do đó, toàn bộ mã nguồn chưa được công khai đầy đủ tại thời điểm hiện tại.
-
-Repository này được sử dụng nhằm trình bày ý tưởng nghiên cứu, thiết kế mô hình, quy trình thực nghiệm và kết quả chính của dự án. Mã nguồn hoàn chỉnh sẽ được cập nhật sau khi quá trình chấm điểm chính thức kết thúc.
-
 ## **🎯 Mục tiêu**
 
 - **Phát triển các mô hình dự báo** giá cổ phiếu **đa phương thức** dựa trên: **Cross-Attention, Feature Concatenation**
@@ -112,12 +106,6 @@ Dự án chứng minh rằng tích hợp tin tức tài chính một cách có c
 This undergraduate IT graduation project proposes a multimodal stock price forecasting framework that integrates historical market time-series data with Vietnamese financial news.
 
 Unlike conventional approaches that either rely solely on numerical data or naïvely combine text and prices, this project introduces relevance-aware multimodal fusion, particularly via cross-attention, to dynamically identify news that truly influences price movements.
-
-## Note
-
-This project is currently in the final development and grading phase of an undergraduate graduation project. Therefore, the complete source code is not publicly available at this stage.
-
-This repository is intended to present the research motivation, model design, experimental pipeline, and key findings of the project. The full implementation will be released after the official evaluation process is completed.
 
 ## 🎯 Objectives
 
